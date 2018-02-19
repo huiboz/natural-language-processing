@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+
+# Huibo Zhao
+# Feb.18th
+
+
+
 import math
 
 # This function returns a dictionary of count_y
@@ -53,8 +60,8 @@ dict_prob, dict_tag = emission_probability("ner_rare.counts")
 
 def entity_tagger(filename,outputFile):
 
-    taggers = ['_RARE_','O','I-PER','I-LOC','I-MISC','I-ORG','B-MISC','B-ORG','B-LOC']
-    rare_prob = math.log(1/count_y_dict['_RARE_'])
+    taggers = ['O','I-PER','I-LOC','I-MISC','I-ORG','B-MISC','B-ORG','B-LOC']
+
     with open(filename) as text:
         with open(outputFile, 'w') as new_text:
             for line in text:
@@ -66,7 +73,7 @@ def entity_tagger(filename,outputFile):
                     if word in dict_prob:
                         new_line = word + " " + dict_tag[word] + " " + str(math.log(dict_prob[word])) + "\n"
                     else:
-                        new_line = word + " " + "_RARE_" + " " + str(rare_prob) + "\n"
+                        new_line = word + " " + dict_tag['_RARE_'] + " " + str(math.log(dict_prob['_RARE_'])) + "\n"
 
                     new_text.write(new_line)
 
