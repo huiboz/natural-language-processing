@@ -4,7 +4,7 @@
 # Feb.18th.2018
 
 
-# This function replace infrequent words with symbol _RARE_
+# This function replace infrequent words with symbol _ABR_,_CAP_,_NUM_,_RARE_
 def replace_rare(filename,newFilename):
     word_count = {}
     text = open(filename,"r")
@@ -33,11 +33,11 @@ def replace_rare(filename,newFilename):
                         elif word.isdigit():
                             new_word = "_NUM_"
                         else:
-                            
+                            new_word = "_RARE_"
 
 
 
-                        line_temp = "_RARE_" + " " + symbol + "\n"
+                        line_temp = new_word + " " + symbol + "\n"
                         new_text.write(line_temp)
                     else:
                         new_text.write(line)
@@ -47,4 +47,4 @@ def replace_rare(filename,newFilename):
 
 
 
-#replace_rare("ner_train.dat","ner_train_rare2.dat")
+replace_rare("ner_train.dat","ner_train_rare2.dat")
